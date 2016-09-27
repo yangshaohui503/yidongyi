@@ -63,7 +63,7 @@
 							</div>
 							<div class="title">用户数量</div>
 							<div class="value" th:text="${userscount}"></div>
-							<a class="more" href="javascript:void(0);">查看更多 <i
+							<a class="more" th:href="@{/admin/user}">查看更多 <i
 								class="pull-right icon-angle-right"></i></a>
 						</div>
 					</div>
@@ -79,7 +79,7 @@
 							</div>
 							<div class="title">新闻数量</div>
 							<div class="value" th:text="${newscount}"></div>
-							<a class="more" href="javascript:void(0);">查看更多 <i
+							<a class="more" th:href="@{/admin/news}">查看更多 <i
 								class="pull-right icon-angle-right"></i></a>
 						</div>
 					</div>

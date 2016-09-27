@@ -21,6 +21,9 @@
 
 			<!--=== Navigation ===-->
 			<ul id="nav">
+				<div class="sidebar-title">
+					<span>后台管理</span>
+				</div>
 				<li th:class="${dashboard} ? 'current' : ''"><a href="./">
 						<i class="icon-dashboard"></i> 仪表盘
 				</a></li>
@@ -30,12 +33,15 @@
 				<li th:class="${news} ? 'current' : ''"><a href="news"> <i
 						class="icon-list"></i> 新闻管理
 				</a></li>
+				<div class="sidebar-title">
+					<span>API管理</span>
+				</div>
 				<li><a href="/swagger-ui.html" target="_blank"> <i
 						class="icon-rocket"></i> 在线API手册
 				</a></li>
-				<li><a href="/lightadmin" target="_blank"> <i
+				<!-- 				<li><a href="/lightadmin" target="_blank"> <i
 						class="icon-book"></i> 后端数据管理
-				</a></li>
+				</a></li> -->
 
 			</ul>
 

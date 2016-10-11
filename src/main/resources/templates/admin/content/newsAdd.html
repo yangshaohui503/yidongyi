@@ -12,7 +12,7 @@
 			<!-- Breadcrumbs line -->
 			<div class="crumbs">
 				<ul id="breadcrumbs" class="breadcrumb">
-					<li><i class="icon-home"></i> <a href="index.html">仪表盘</a></li>
+					<li><i class="icon-home"></i> <a href="/">仪表盘</a></li>
 					<li class="current">新闻管理</li>
 				</ul>
 
@@ -54,7 +54,9 @@
 									图片: <input type="text" th:field="*{img}" />
 								</p>
 								<p>
-									内容: <input type="text" th:field="*{content}" />
+									内容:
+									<textarea rows="3" cols="20" th:field="*{content}"
+										style="margin-left: 0px;"></textarea>
 								</p>
 								<p>
 									<input type="submit" value="提交" /> <input type="reset"

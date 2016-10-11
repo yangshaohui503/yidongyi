@@ -24,13 +24,13 @@
 				<div class="sidebar-title">
 					<span>后台管理</span>
 				</div>
-				<li th:class="${dashboard} ? 'current' : ''"><a href="./">
+				<li th:class="${dashboard} ? 'current' : ''"><a href="/">
 						<i class="icon-dashboard"></i> 仪表盘
 				</a></li>
-				<li th:class="${user} ? 'current' : ''"><a href="user"> <i
+				<li th:class="${user} ? 'current' : ''"><a href="/admin/user"> <i
 						class="icon-user"></i> 用户管理
 				</a></li>
-				<li th:class="${news} ? 'current' : ''"><a href="news"> <i
+				<li th:class="${news} ? 'current' : ''"><a href="/admin/news"> <i
 						class="icon-list"></i> 新闻管理
 				</a></li>
 				<div class="sidebar-title">

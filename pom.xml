@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.sectong</groupId>
-	<artifactId>mobileeasy</artifactId>
+	<artifactId>yidongyi</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>MobileEasy</name>
-	<description>MobileEasy|移动易后台</description>
+	<name>yidongyi</name>
+	<description>移动易后台</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -20,7 +20,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<start-class>com.sectong.MobileEasyApplication</start-class>
+		<start-class>com.sectong.YidongyiApplication</start-class>
 		<java.version>1.8</java.version>
 		<swagger.version>2.5.0</swagger.version>
 	</properties>

@@ -43,11 +43,7 @@ public class NewsServiceImpl implements NewsService {
 	public News create(NewsCreateForm form) {
 		User user = userService.getCurrentUser();
 		News news = new News();
-		news.setTitle(form.getTitle());
-		news.setContent(form.getContent());
-		news.setImg("");
-		news.setDatetime(new Date());
-		news.setUser(user);
+		news.createNews(form.getTitle(), form.getImg(), form.getContent(), new Date(), user);
 		newsRepository.save(news);
 		return news;
 

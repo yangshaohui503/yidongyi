@@ -77,4 +77,12 @@ public class News {
 		this.user = user;
 	}
 
+	public void createNews(String title, String img, String content, Date datetime, User user) {
+		this.title = title;
+		this.img = img;
+		this.content = content;
+		this.datetime = datetime;
+		this.user = user;
+	}
+
 }

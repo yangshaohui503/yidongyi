@@ -1,5 +1,7 @@
 package com.sectong.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -10,19 +12,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sectong.domain.News;
+import com.sectong.domain.User;
 import com.sectong.repository.NewsRepository;
 import com.sectong.repository.UserRepository;
+import com.sectong.service.UserService;
 
 @Controller
 public class AdminController {
 
 	private UserRepository userRepository;
 	private NewsRepository newsRepository;
+	private UserService userService;
 
 	@Autowired
-	public AdminController(NewsRepository newsRepository, UserRepository userRepository) {
+	public AdminController(NewsRepository newsRepository, UserRepository userRepository, UserService userService) {
 		this.userRepository = userRepository;
 		this.newsRepository = newsRepository;
+		this.userService = userService;
 	}
 
 	/**
@@ -100,6 +106,9 @@ public class AdminController {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/admin/news/edit")
 	public String newsSubmit(@ModelAttribute News news) {
+		news.setDatetime(new Date());
+		User user = userService.getCurrentUser();
+		news.setUser(user);
 		newsRepository.save(news);
 		return "redirect:/admin/news";
 	}

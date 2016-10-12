@@ -12,9 +12,11 @@
 	mvn spring-boot:run
 	...
 	...
-	log出现：Tomcat started on port(s): 8080 (http)，证明启动成功
+	log出现：started on port(s): 8080 (http)，证明启动成功
 
 ```
+
+![输入图片说明](http://git.oschina.net/uploads/images/2016/1012/004616_ba7a1304_1034557.png "在这里输入图片标题")
 
 ## 管理系统
 
@@ -22,9 +24,13 @@ http://localhost:8080
 
 user: admin , pass: admin
 
+![输入图片说明](http://git.oschina.net/uploads/images/2016/1012/013225_724e6a89_1034557.png "在这里输入图片标题")
+
 ## API调试
 
 http://localhost:8080/swagger-ui.html
+
+![输入图片说明](http://git.oschina.net/uploads/images/2016/1012/012622_a276da1d_1034557.png "在这里输入图片标题")
 
 ## 完整文档参考
 

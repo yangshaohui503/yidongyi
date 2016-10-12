@@ -1,5 +1,9 @@
 # 移动易 —— 让移动应用开发更容易！
 
+## 简单概述
+
+本项目为移动易后台服务端，提供了一个基础的APP后台框架。
+
 ## 启动应用步骤：
 
  - git clone https://github.com/sectong/yidongyi ; or  git clone https://git.oschina.net/sectong/yidongyi.git

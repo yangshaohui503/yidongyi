@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,8 +52,8 @@ public class NewsController {
 	}
 
 	@RequestMapping(value = "news/getNewsList", method = RequestMethod.GET)
-	public ResponseEntity<Message> getNewsList(Pageable p) {
-		Page<News> news = newsService.getNewsList(p);
+	public ResponseEntity<Message> getNewsList(@RequestParam(defaultValue = "0") Long startid, Pageable p) {
+		Page<News> news = newsService.getNewsList(startid, p);
 		message.setMsg(1, "获取新闻列表成功", news);
 		return new ResponseEntity<Message>(message, HttpStatus.OK);
 	}

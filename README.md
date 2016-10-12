@@ -30,4 +30,4 @@ http://localhost:8080/swagger-ui.html
 
 请参阅本项目 Wiki 页。
 
-## 请加入企鹅讨论群：103880410，请注明来自[赛克通博客](https://blog.sectong.com)或GitHub。
+## 请加入企鹅讨论群：103880410，请注明来自[赛克通博客](https://blog.sectong.com)、[开源中国](https://git.oschina.net/sectong)或[GitHub](https://github.com/sectong)。

@@ -53,8 +53,8 @@ public class NewsServiceImpl implements NewsService {
 	 * 获取新闻列表
 	 */
 	@Override
-	public Page<News> getNewsList(Pageable p) {
-		Page<News> news = newsRepository.findAll(p);
+	public Page<News> getNewsList(Long startid, Pageable p) {
+		Page<News> news = newsRepository.findByIdGreaterThan(startid, p);
 		return news;
 	}
 

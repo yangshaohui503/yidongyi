@@ -16,6 +16,6 @@ public interface NewsService {
 
 	News create(NewsCreateForm form);
 
-	Page<News> getNewsList(Pageable p);
+	Page<News> getNewsList(Long startid, Pageable p);
 
 }

@@ -5,7 +5,7 @@
 
 	<groupId>com.sectong</groupId>
 	<artifactId>yidongyi</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>0.1.0-RELEASE</version>
 	<packaging>jar</packaging>
 
 	<name>yidongyi</name>

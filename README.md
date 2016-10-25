@@ -6,7 +6,7 @@
 
 ## 启动应用步骤：
 
- - git clone https://github.com/sectong/yidongyi ; or  git clone https://git.oschina.net/sectong/yidongyi.git
+ - git clone https://git.oschina.net/sectong/yidongyi.git (主站点) or  git clone https://github.com/sectong/yidongyi （备份站点）
  - import to Eclipse；
  - run
 
@@ -41,3 +41,7 @@ http://localhost:8080/swagger-ui.html
 请参阅本项目 Wiki 页。
 
 ## 请加入企鹅讨论群：103880410，请注明来自[赛克通博客](https://blog.sectong.com)、[开源中国](https://git.oschina.net/sectong)或[GitHub](https://github.com/sectong)。
+
+## 腾讯课堂公开课
+
+每周在腾讯课堂视频直播，讲述框架基础、原理、演示DEMO，在线答疑。  [赛克通腾讯课堂](http://sectong.ke.qq.com)

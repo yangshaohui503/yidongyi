@@ -4,6 +4,26 @@
 
 本项目为移动易后台服务端，提供了一个基础的APP后台框架。
 
+## 文档参考
+
+ - 项目网站：
+
+	https://www.mobileeasy.cc
+
+ - 代码托管：
+
+	开源中国(主站点)： https://git.oschina.net/sectong/yidongyi
+	
+	GitHub（备份站点）： https://github.com/sectong/yidongyi
+
+ - 技术博客：
+
+	https://blog.sectong.com
+
+ - 公司网站：
+
+	https://sectong.com
+
 ## 启动应用步骤：
 
  - git clone https://git.oschina.net/sectong/yidongyi.git (主站点) or  git clone https://github.com/sectong/yidongyi （备份站点）

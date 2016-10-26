@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sectong.domain.Authority;
+import com.sectong.domain.ResetPasswordForm;
 import com.sectong.domain.User;
 import com.sectong.domain.UserCreateForm;
 import com.sectong.repository.AuthorityRepository;
@@ -83,6 +84,20 @@ public class UserServiceImpl implements UserService {
 		// System.out.println(form);
 		return userRepository.save(user);
 	}
+
+	/**
+	 * 重置用户密码
+	 */
+	@Override
+	public User resetPassword(ResetPasswordForm form) {
+		User user = userRepository.findByUsername(form.getMobile());
+		user.setPassword(new BCryptPasswordEncoder(10).encode(form.getPassword()));
+		return userRepository.save(user);
+	}
+
+	/**
+	 * 用户上传头像
+	 */
 
 	@Override
 	public Object uploadImage(MultipartFile file, HttpServletRequest request) {

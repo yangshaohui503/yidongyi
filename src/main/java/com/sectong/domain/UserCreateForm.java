@@ -16,6 +16,9 @@ public class UserCreateForm {
 	@NotEmpty
 	private String password;
 
+	@NotEmpty
+	private String vcode;
+
 	public String getUsername() {
 		return username;
 	}
@@ -30,6 +33,14 @@ public class UserCreateForm {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getVcode() {
+		return vcode;
+	}
+
+	public void setVcode(String vcode) {
+		this.vcode = vcode;
 	}
 
 	@Override

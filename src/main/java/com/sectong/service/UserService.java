@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sectong.domain.ResetPasswordForm;
 import com.sectong.domain.User;
 import com.sectong.domain.UserCreateForm;
 
@@ -29,5 +30,7 @@ public interface UserService {
 	Object listAllUsers(Pageable p);
 
 	Object getUserList(int current, int rowCount, String searchPhrase);
+
+	User resetPassword(ResetPasswordForm form);
 
 }

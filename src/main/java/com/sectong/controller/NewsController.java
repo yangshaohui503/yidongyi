@@ -23,6 +23,8 @@ import com.sectong.domain.NewsCreateForm;
 import com.sectong.message.Message;
 import com.sectong.service.NewsService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value = "/api/v1", name = "新闻API")
 public class NewsController {
@@ -39,6 +41,7 @@ public class NewsController {
 
 	@ResponseBody
 	@RequestMapping(value = "i/news/create", method = RequestMethod.POST)
+	@ApiOperation(value="创建新闻接口", notes="创建新闻，接口提交json格式，字段参见form参数")
 	public ResponseEntity<Message> createNews(@Valid @RequestBody NewsCreateForm form, BindingResult bindingResult) {
 		try {
 			News news = newsService.create(form);
@@ -52,6 +55,7 @@ public class NewsController {
 	}
 
 	@RequestMapping(value = "news/getNewsList", method = RequestMethod.GET)
+	@ApiOperation(value="获取新闻列表接口", notes="获取新闻列表，接口startid默认0，下拉时根据最大值获取后续列表，可分页查询")
 	public ResponseEntity<Message> getNewsList(@RequestParam(defaultValue = "0") Long startid, Pageable p) {
 		Page<News> news = newsService.getNewsList(startid, p);
 		message.setMsg(1, "获取新闻列表成功", news);

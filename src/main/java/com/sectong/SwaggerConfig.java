@@ -35,8 +35,8 @@ public class SwaggerConfig {
 
 	@SuppressWarnings("deprecation")
 	private ApiInfo apiInfo() {
-		ApiInfo apiInfo = new ApiInfo("移动易 API 手册", "API手册", "0.1.0", "Terms of service", "support@sectong.com",
-				"Apache 2.0", "");
+		ApiInfo apiInfo = new ApiInfo("移动易 API 手册", "此在线API手册为客户端用户提供开发参考", "0.2.0", "Terms of service", "support@sectong.com",
+				"sectong|赛克通", "http://www.sectong.com");
 		return apiInfo;
 	}
 

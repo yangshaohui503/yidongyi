@@ -14,11 +14,12 @@ import com.sectong.message.Message;
 import com.sectong.service.SendSMSService;
 import com.sectong.validator.ValidatorUtil;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @Controller
 @RequestMapping(value = "/api/v1", name = "第三方API")
-
+@Api(tags = "第三方API")
 public class ThirdPartyController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ThirdPartyController.class);
@@ -38,7 +39,7 @@ public class ThirdPartyController {
 	 * @return
 	 */
 	@PostMapping("requestSMS")
-	@ApiOperation(value="请求短信验证码接口", notes="请求短信验证码接口，POST请求，参数mobile必须为11位手机号码")
+	@ApiOperation(value = "请求短信验证码接口", notes = "请求短信验证码接口，POST请求，参数mobile必须为11位手机号码")
 	public ResponseEntity<Message> requestSMS(@RequestParam String mobile) {
 
 		if (mobile.isEmpty()) {

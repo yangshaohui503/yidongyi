@@ -37,6 +37,7 @@ import com.sectong.service.SendSMSService;
 import com.sectong.service.UserService;
 import com.sectong.validator.UserCreateFormValidator;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -48,6 +49,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @PropertySource("classpath:message.properties")
 @RequestMapping(value = "/api/v1/", name = "用户API")
+@Api(tags = "用户API")
 public class UserController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);

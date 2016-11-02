@@ -11,9 +11,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,10 +24,13 @@ import com.sectong.domain.NewsCreateForm;
 import com.sectong.message.Message;
 import com.sectong.service.NewsService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping(value = "/api/v1", name = "新闻API")
+@Api(tags = "新闻API")
+
 public class NewsController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(NewsController.class);
@@ -40,8 +44,8 @@ public class NewsController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "i/news/create", method = RequestMethod.POST)
-	@ApiOperation(value="创建新闻接口", notes="创建新闻，接口提交json格式，字段参见form参数")
+	@PostMapping(value = "i/news/create")
+	@ApiOperation(value = "创建新闻接口", notes = "创建新闻，接口提交json格式，字段参见form参数")
 	public ResponseEntity<Message> createNews(@Valid @RequestBody NewsCreateForm form, BindingResult bindingResult) {
 		try {
 			News news = newsService.create(form);
@@ -54,8 +58,8 @@ public class NewsController {
 		}
 	}
 
-	@RequestMapping(value = "news/getNewsList", method = RequestMethod.GET)
-	@ApiOperation(value="获取新闻列表接口", notes="获取新闻列表，接口startid默认0，下拉时根据最大值获取后续列表，可分页查询")
+	@GetMapping(value = "news/getNewsList")
+	@ApiOperation(value = "获取新闻列表接口", notes = "获取新闻列表，接口startid默认0，下拉时根据最大值获取后续列表，可分页查询")
 	public ResponseEntity<Message> getNewsList(@RequestParam(defaultValue = "0") Long startid, Pageable p) {
 		Page<News> news = newsService.getNewsList(startid, p);
 		message.setMsg(1, "获取新闻列表成功", news);

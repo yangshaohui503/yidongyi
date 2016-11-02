@@ -11,12 +11,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.sectong.domain.News;
 import com.sectong.domain.User;
 import com.sectong.repository.NewsRepository;
 import com.sectong.repository.UserRepository;
 import com.sectong.service.UserService;
 
+/**
+ * 后台管理控制器
+ * 
+ * @author jiekechoo
+ *
+ */
 @Controller
 public class AdminController {
 
@@ -125,6 +132,17 @@ public class AdminController {
 	public String delNews(Model model, @RequestParam Long id) {
 		newsRepository.delete(id);
 		return "redirect:/admin/news";
+	}
 
+	/**
+	 * 后台配置管理
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@GetMapping("/admin/configuration")
+	public String configuration(Mode model) {
+		return "admin/configuration";
 	}
 }

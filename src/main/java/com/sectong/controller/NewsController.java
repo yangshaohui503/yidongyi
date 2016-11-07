@@ -29,7 +29,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping(value = "/api/v1", name = "新闻API")
-@Api(tags = "新闻API")
+@Api(description = "新闻API")
 
 public class NewsController {
 

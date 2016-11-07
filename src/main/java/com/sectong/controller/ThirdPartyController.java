@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiOperation;
 
 @Controller
 @RequestMapping(value = "/api/v1", name = "第三方API")
-@Api(tags = "第三方API")
+@Api(description = "第三方API")
 public class ThirdPartyController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ThirdPartyController.class);

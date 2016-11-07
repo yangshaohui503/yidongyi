@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.sectong.domain.News;
 import com.sectong.domain.User;
 import com.sectong.repository.NewsRepository;
+import com.sectong.repository.ThirdpartyRepository;
 import com.sectong.repository.UserRepository;
+import com.sectong.service.SendSMSService;
 import com.sectong.service.UserService;
 
 /**
@@ -25,17 +26,23 @@ import com.sectong.service.UserService;
  *
  */
 @Controller
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class AdminController {
 
 	private UserRepository userRepository;
 	private NewsRepository newsRepository;
 	private UserService userService;
+	private SendSMSService sendSMSService;
+	private ThirdpartyRepository thirdpartyRepository;
 
 	@Autowired
-	public AdminController(NewsRepository newsRepository, UserRepository userRepository, UserService userService) {
+	public AdminController(NewsRepository newsRepository, UserRepository userRepository, UserService userService,
+			SendSMSService sendSMSService, ThirdpartyRepository thirdpartyRepository) {
 		this.userRepository = userRepository;
 		this.newsRepository = newsRepository;
 		this.userService = userService;
+		this.sendSMSService = sendSMSService;
+		this.thirdpartyRepository = thirdpartyRepository;
 	}
 
 	/**
@@ -84,7 +91,6 @@ public class AdminController {
 	 * @param model
 	 * @return
 	 */
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/admin/news/add")
 	public String newsAdd(Model model) {
 		model.addAttribute("newsAdd", new News());
@@ -97,7 +103,6 @@ public class AdminController {
 	 * @param model
 	 * @return
 	 */
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/admin/news/edit")
 	public String newsEdit(Model model, @RequestParam Long id) {
 		model.addAttribute("newsEdit", newsRepository.findOne(id));
@@ -110,7 +115,6 @@ public class AdminController {
 	 * @param news
 	 * @return
 	 */
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/admin/news/edit")
 	public String newsSubmit(@ModelAttribute News news) {
 		news.setDatetime(new Date());
@@ -127,7 +131,6 @@ public class AdminController {
 	 * @param id
 	 * @return
 	 */
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/admin/news/del")
 	public String delNews(Model model, @RequestParam Long id) {
 		newsRepository.delete(id);
@@ -140,9 +143,60 @@ public class AdminController {
 	 * @param model
 	 * @return
 	 */
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/admin/configuration")
-	public String configuration(Mode model) {
+	public String configuration(Model model) {
 		return "admin/configuration";
+	}
+
+	/**
+	 * 第三方配置管理
+	 * 
+	 * @param model
+	 * @return
+	 */
+
+	@GetMapping("/admin/thirdparty")
+	public String thirdparty(Model model) {
+		model.addAttribute("thirdparty", true);
+		String smsUsername = null, smsPassword = null;
+		try {
+			smsUsername = thirdpartyRepository.findOne("smsUsername").getValue();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		try {
+			smsPassword = thirdpartyRepository.findOne("smsPassword").getValue();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		if (!sendSMSService.checkSmsAccountStatus(smsUsername, smsPassword)) {
+			model.addAttribute("error", true);// 状态不正常
+		}
+		if (smsUsername == null && smsPassword == null) {
+			model.addAttribute("init", true);// 第一次初始化
+			model.addAttribute("error", false);
+		}
+		model.addAttribute("smsUsername", smsUsername);
+		model.addAttribute("smsPassword", smsPassword);
+		return "admin/thirdparty";
+	}
+
+	/**
+	 * 提交短信平台账号信息
+	 * 
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	@PostMapping("/admin/thirdpartysms")
+	public String thirdpartysms(@RequestParam String username, @RequestParam String password) {
+		sendSMSService.saveSmsConfig(username, password);
+		if (sendSMSService.checkSmsAccountStatus(username, password)) {
+			return "redirect:/admin/thirdparty?ok";// 账号正常
+		} else {
+			return "redirect:/admin/thirdparty?error";// 状态不正常
+		}
+
 	}
 }

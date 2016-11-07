@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>header</title>
+</head>
+
+<body>
+	<div id="content" th:fragment="content">
+		<div class="container">
+
+			<!--=== Page Header ===-->
+			<div class="page-header">
+				<div class="page-title">
+					<h3>第三方配置管理</h3>
+				</div>
+
+			</div>
+			<!-- /Page Header -->
+
+			<!--=== Page Content ===-->
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="widget box">
+						<div class="widget-header">
+							<h4>
+								<i class="icon-reorder"></i> 第三方配置
+							</h4>
+							<div class="toolbar no-padding">
+								<div class="btn-group">
+									<span class="btn btn-xs widget-collapse"><i
+										class="icon-angle-down"></i></span>
+								</div>
+							</div>
+						</div>
+						<div class="widget-content">
+							<div class="row">
+								<div class="col-md-6">
+									<!-- Tabs-->
+									<div class="tabbable tabbable-custom">
+										<ul class="nav nav-tabs">
+											<li class="active"><a href="#tab_1" data-toggle="tab">短信平台</a></li>
+											<li><a href="#tab_2" data-toggle="tab">推送平台</a></li>
+										</ul>
+										<div class="tab-content">
+											<div class="tab-pane active" id="tab_1">
+												<div th:if="${param.error} or ${error}"
+													class="alert alert-danger fade in">
+													<i class="icon-remove close" data-dismiss="alert"></i>
+													账号异常，请<a
+														href="http://cps.253.com/redirect/url?did=57&amp;rid=0&amp;jump=http://zz.253.com/site/register.html"
+														target="_blank">注册一个新账号</a>。
+												</div>
+												<div th:if="${param.ok}" class="alert alert-info fade in">
+													<i class="icon-remove close" data-dismiss="alert"></i>
+													账号增加正常。
+												</div>
+												<div th:if="${init}" class="alert alert-info fade in">
+													<i class="icon-remove close" data-dismiss="alert"></i>
+													请初始化短信平台账号。
+												</div>
+												<p>
+													请输入创蓝·253短信平台用户名密码，如果还没有账号，请<a
+														href="http://cps.253.com/redirect/url?did=57&amp;rid=0&amp;jump=http://zz.253.com/site/register.html"
+														target="_blank">注册一个</a>。
+												</p>
+												<form class="form-horizontal row-border" id="validate-1"
+													action="/admin/thirdpartysms" novalidate="novalidate"
+													method="post">
+													<div class="form-group">
+														<label class="col-md-3 control-label">用户名 <span
+															class="required">*</span></label>
+														<div class="col-md-9">
+															<input name="username" class="form-control" type="text"
+																th:value="${smsUsername}" />
+														</div>
+													</div>
+													<div class="form-group">
+														<label class="col-md-3 control-label">密码 <span
+															class="required">*</span></label>
+														<div class="col-md-9">
+															<input name="password" class="form-control" type="text"
+																th:value="${smsPassword}" />
+														</div>
+													</div>
+													<div class="form-actions">
+														<input value="确认" class="btn btn-primary pull-right"
+															type="submit" />
+													</div>
+												</form>
+											</div>
+											<div class="tab-pane" id="tab_2">
+												<p>I'm in Section 2.</p>
+											</div>
+										</div>
+									</div>
+									<!--END TABS-->
+								</div>
+
+							</div>
+							<!-- /.row -->
+						</div>
+						<!-- /.widget-content -->
+					</div>
+					<!-- /.widget .box -->
+				</div>
+			</div>
+
+			<!-- /.row -->
+			<!-- /Page Content -->
+		</div>
+		<!-- /.container -->
+
+	</div>
+
+</body>
+</html>

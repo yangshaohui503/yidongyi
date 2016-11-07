@@ -9,45 +9,12 @@
 <body>
 	<div id="content" th:fragment="content">
 		<div class="container">
-			<!-- Breadcrumbs line -->
-			<div class="crumbs">
-				<ul id="breadcrumbs" class="breadcrumb">
-					<li><i class="icon-home"></i> <a href="/">仪表盘</a></li>
-					<li class="current">用户管理
-					</li>
-				</ul>
-
-			</div>
-			<!-- /Breadcrumbs line -->
 
 			<!--=== Page Header ===-->
 			<div class="page-header">
 				<div class="page-title">
 					<h3>用户管理</h3>
-					<span th:inline="text">欢迎使用，[[${#httpServletRequest.remoteUser}]]!</span>
 				</div>
-
-				<!-- Page Stats -->
-				<ul class="page-stats">
-					<li>
-						<div class="summary">
-							<span>新订单</span>
-							<h3>17,561</h3>
-						</div>
-						<div id="sparkline-bar" class="graph sparkline hidden-xs">20,15,8,50,20,40,20,30,20,15,30,20,25,20</div>
-						<!-- Use instead of sparkline e.g. this:
-							<div class="graph circular-chart" data-percent="73">73%</div>
-							-->
-					</li>
-					<li>
-						<div class="summary">
-							<span>我的余额</span>
-							<h3>$21,561.21</h3>
-						</div>
-						<div id="sparkline-bar2" class="graph sparkline hidden-xs">20,15,8,50,20,40,20,30,20,15,30,20,25,20</div>
-					</li>
-				</ul>
-				<!-- /Page Stats -->
 			</div>
 			<!-- /Page Header -->
 

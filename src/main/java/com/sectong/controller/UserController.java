@@ -49,7 +49,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @PropertySource("classpath:message.properties")
 @RequestMapping(value = "/api/v1/", name = "用户API")
-@Api(tags = "用户API")
+@Api(description = "用户API")
 public class UserController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);

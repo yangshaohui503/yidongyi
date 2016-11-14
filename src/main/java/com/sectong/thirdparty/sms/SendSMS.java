@@ -13,21 +13,10 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.params.HttpClientParams;
 
 /**
+ * 短信平台
  * 
- * @param url
- *            应用地址，类似于http://ip:port/msg/
- * @param account
- *            账号
- * @param pswd
- *            密码
- * @param mobile
- *            手机号码，多个号码使用","分割
- * @param msg
- *            短信内容
- * @param needstatus
- *            是否需要状态报告，需要true，不需要false
- * @return 返回值定义参见HTTP协议文档
- * @throws Exception
+ * @author jiekechoo
+ *
  */
 public class SendSMS {
 	/**

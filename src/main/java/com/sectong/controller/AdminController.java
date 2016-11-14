@@ -1,7 +1,10 @@
 package com.sectong.controller;
 
+import java.io.IOException;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -16,8 +19,10 @@ import com.sectong.domain.User;
 import com.sectong.repository.NewsRepository;
 import com.sectong.repository.ThirdpartyRepository;
 import com.sectong.repository.UserRepository;
+import com.sectong.service.AppPushService;
 import com.sectong.service.SendSMSService;
 import com.sectong.service.UserService;
+import com.sectong.thirdparty.push.AppPush;
 
 /**
  * 后台管理控制器
@@ -29,20 +34,24 @@ import com.sectong.service.UserService;
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 public class AdminController {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(AdminController.class);
+
 	private UserRepository userRepository;
 	private NewsRepository newsRepository;
 	private UserService userService;
 	private SendSMSService sendSMSService;
 	private ThirdpartyRepository thirdpartyRepository;
+	private AppPushService appPushService;;
 
 	@Autowired
 	public AdminController(NewsRepository newsRepository, UserRepository userRepository, UserService userService,
-			SendSMSService sendSMSService, ThirdpartyRepository thirdpartyRepository) {
+			SendSMSService sendSMSService, ThirdpartyRepository thirdpartyRepository, AppPushService appPushService) {
 		this.userRepository = userRepository;
 		this.newsRepository = newsRepository;
 		this.userService = userService;
 		this.sendSMSService = sendSMSService;
 		this.thirdpartyRepository = thirdpartyRepository;
+		this.appPushService = appPushService;
 	}
 
 	/**
@@ -158,7 +167,7 @@ public class AdminController {
 	@GetMapping("/admin/thirdparty")
 	public String thirdparty(Model model) {
 		model.addAttribute("thirdparty", true);
-		String smsUsername = null, smsPassword = null;
+		String smsUsername = null, smsPassword = null, pushAppID = null, pushAppKey = null, pushMasterSecret = null;
 		try {
 			smsUsername = thirdpartyRepository.findOne("smsUsername").getValue();
 		} catch (Exception e) {
@@ -170,6 +179,24 @@ public class AdminController {
 			// TODO: handle exception
 		}
 
+		try {
+			pushAppID = thirdpartyRepository.findOne("pushAppID").getValue();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		try {
+			pushAppKey = thirdpartyRepository.findOne("pushAppKey").getValue();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		try {
+			pushMasterSecret = thirdpartyRepository.findOne("pushMasterSecret").getValue();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
 		if (!sendSMSService.checkSmsAccountStatus(smsUsername, smsPassword)) {
 			model.addAttribute("error", true);// 状态不正常
 		}
@@ -177,8 +204,15 @@ public class AdminController {
 			model.addAttribute("init", true);// 第一次初始化
 			model.addAttribute("error", false);
 		}
+
+		if (pushAppID == null && pushAppKey == null && pushMasterSecret == null) {
+			model.addAttribute("initpush", true);// 第一次初始化
+		}
 		model.addAttribute("smsUsername", smsUsername);
 		model.addAttribute("smsPassword", smsPassword);
+		model.addAttribute("pushAppID", pushAppID);
+		model.addAttribute("pushAppKey", pushAppKey);
+		model.addAttribute("pushMasterSecret", pushMasterSecret);
 		return "admin/thirdparty";
 	}
 
@@ -197,6 +231,34 @@ public class AdminController {
 		} else {
 			return "redirect:/admin/thirdparty?error";// 状态不正常
 		}
+
+	}
+
+	/**
+	 * 提交推送平台信息
+	 * 
+	 * @param appID
+	 * @param appKey
+	 * @param masterSecret
+	 * @return
+	 */
+	@PostMapping("/admin/thirdpartypush")
+	public String thirdPartyPush(@RequestParam String pushAppID, @RequestParam String pushAppKey,
+			@RequestParam String pushMasterSecret) {
+		appPushService.savePushConfig(pushAppID, pushAppKey, pushMasterSecret);
+
+		return "redirect:/admin/thirdparty?pok#push";
+	}
+
+	@PostMapping("/admin/thirdpartypushtest")
+	public String thirdPartyPushTest(@RequestParam String title, @RequestParam String text,
+			@RequestParam String openUrl) throws IOException {
+		if (appPushService.sendPushMsg(title, text, openUrl)) {
+			return "redirect:/admin/thirdparty?testok#push";
+		}else {
+			return "redirect:/admin/thirdparty?testerror#push";
+		}
+		
 
 	}
 }

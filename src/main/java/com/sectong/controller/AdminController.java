@@ -22,7 +22,6 @@ import com.sectong.repository.UserRepository;
 import com.sectong.service.AppPushService;
 import com.sectong.service.SendSMSService;
 import com.sectong.service.UserService;
-import com.sectong.thirdparty.push.AppPush;
 
 /**
  * 后台管理控制器
@@ -65,6 +64,7 @@ public class AdminController {
 		model.addAttribute("dashboard", true);
 		model.addAttribute("userscount", userRepository.count());
 		model.addAttribute("newscount", newsRepository.count());
+		LOGGER.info("access admin /");
 		return "admin/index";
 	}
 
